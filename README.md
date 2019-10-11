@@ -14,3 +14,7 @@ Since the script is quite short, it will fit in a URL for reflected XSS attacks,
 
 This script could be targeted on a per-page basis, to get the username and password input names right, or it could just contain 
 many variations of common username and password input names so the browser will autofill at least some of them.
+
+## Fallback when the fields aren't autofilled
+The script could be extended to display the login page of the site in an iframe, layered over the page where the XSS payload executes.
+In this instances, a click even would be registered on the submit button that captures the username/password, stops propagation, and removes the iframe.
