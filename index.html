@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XSS Log in</title>
+
+  <style>
+    body {
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+      color: #333;
+    }
+
+    #sign-in-form {
+      max-width: 300px;
+      margin: 10% auto 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+    }
+
+    input {
+      margin-top: 8px;
+      padding: 8px 16px;
+      border: 1px solid grey;
+      width: 100%;
+    }
+
+    button {
+      margin-top: 8px;
+      background: steelblue;
+      color: white;
+      padding: 8px 16px;
+      font-size: inherit;
+      border: none;
+    }
+
+  </style>
+</head>
+<body>
+  <form id="sign-in-form" action="" method="post">
+    <label>User name (anything will work)<br/>
+      <input name="username" />
+    </label>
+
+    <label>Password (anything will work)<br/>
+      <input name="password" type="password" />
+    </label>
+
+    <p>Sign in and let the browser save your username and password</p>
+
+    <button>Sign in</button>
+  </form>
+
+  <script>
+    const formEl = document.getElementById('sign-in-form');
+
+    formEl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.location = '/logged-in.html';
+    });
+  </script>
+</body>
+</html>
