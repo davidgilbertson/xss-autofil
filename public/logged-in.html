@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XSS Logged in</title>
+
+  <style>
+    body {
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+      color: #333;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    Search results for: <span id="query"></span>
+  </h1>
+
+  <div id="hint" hidden>
+    <p>This page has a reflected XSS vulnerability</p>
+    <p>
+      Here's an example search query:
+      <a href="?q=cats%3Cscript%20src%3D%22xss.js%22%3E%3C%2Fscript%3E"> <!--Local version-->
+        ?q=cats%3Cscript%20src%3D%22xss.js%22%3E%3C%2Fscript%3E
+      </a>
+    </p>
+  </div>
+  <p id="say-click" hidden>You've been hacked. Click the page to probably see your password.</p>
+
+  <script>
+    // Mimic jQuery.html() by embedding scripts in a way that executes them
+    const mockJQueryHtml = (parent, string) => {
+      parent.innerHTML = '';
+
+      const placeholder = document.createElement('div');
+      placeholder.innerHTML = string;
+
+      Array.from(placeholder.childNodes).forEach(el => {
+        if (el.tagName === 'SCRIPT') {
+          const newScriptEl = document.createElement('script');
+          newScriptEl.src = el.src;
+
+          parent.append(newScriptEl);
+        } else {
+          parent.append(el);
+        }
+      });
+    };
+
+    const url = new URL(document.location);
+    const query = url.searchParams.get('q');
+
+    if (query) {
+      mockJQueryHtml(document.getElementById('query'), query);
+      document.getElementById('say-click').hidden = false;
+    } else {
+      document.getElementById('hint').hidden = false;
+    }
+  </script>
+</body>
+</html>

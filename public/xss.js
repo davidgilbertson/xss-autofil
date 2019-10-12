@@ -10,5 +10,9 @@ passwordEl.hidden = true;
 document.body.appendChild(passwordEl);
 
 window.addEventListener('click', () => {
-    console.log(` username: ${usernameEl.value}\n password: ${passwordEl.value}`);
+    if (passwordEl.value) {
+        alert(`username: ${usernameEl.value}\npassword: ${passwordEl.value}`);
+    } else {
+        alert('Darn it, I couldn\'t get your password :(');
+    }
 });

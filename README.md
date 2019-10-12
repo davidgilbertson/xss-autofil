@@ -1,8 +1,10 @@
-# xss-autofil
+# XSS Autofill
 
-To see it in action, 'log in' on the `index.html` page. When your browser asks to save your password, allow it.
+To see it in action, serve from the `/public` directory.
+ 
+Then 'log in' on the `index.html` page. When your browser asks to save your password, allow it.
 
-The `logged-in.html` page has a mock XSS vulnerability and loads a malicious script, `xss.js`.
+The `logged-in.html` page has a mock reflected XSS vulnerability and loads a malicious script, `xss.js`.
 
 This script adds a username and password field to the page, which your browser will kindly autofill.
 
