@@ -13,22 +13,23 @@
   </style>
 </head>
 <body>
-  <h1>
-    Search results for: <span id="query"></span>
-  </h1>
-
   <div id="hint" hidden>
-    <p>This page has a reflected XSS vulnerability</p>
+    <p>This page has a reflected XSS vulnerability; it will print a search query into the page.</p>
+
     <p>
-      Here's an example search query:
-      <a href="?q=cats%3Cscript%20src%3D%22xss.js%22%3E%3C%2Fscript%3E"> <!--Local version-->
+      Here's an example search URL:
+      <a href="?q=cats%3Cscript%20src%3D%22xss.js%22%3E%3C%2Fscript%3E">
         cats%3Cscript%20src%3D%
         22xss.js%22%3E%3C%2Fscript%3E
       </a>
     </p>
   </div>
 
-  <div id="say-click" hidden>
+  <div id="search-results" hidden>
+    <h1>
+      Search results for: <span id="query"></span>
+    </h1>
+
     <p>You've been hacked.</p>
     <p>Click the page to see if I got your password.</p>
   </div>
@@ -58,7 +59,7 @@
 
     if (query) {
       mockJQueryHtml(document.getElementById('query'), query);
-      document.getElementById('say-click').hidden = false;
+      document.getElementById('search-results').hidden = false;
     } else {
       document.getElementById('hint').hidden = false;
     }
