@@ -11,7 +11,7 @@ document.body.appendChild(passwordEl);
 
 window.addEventListener('click', () => {
     if (passwordEl.value) {
-        alert(`username: ${usernameEl.value}\npassword: ${passwordEl.value}`);
+        alert(`Gotcha.\nUsername: ${usernameEl.value}\nPassword: ${passwordEl.value}`);
     } else {
         alert('Darn it, I couldn\'t get your password :(');
     }
